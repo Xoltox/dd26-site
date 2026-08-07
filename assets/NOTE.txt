@@ -1,0 +1,6 @@
+Drop replacement logo files here with these exact filenames:
+
+- outsystems-logo.svg        -> official OutSystems logo (referenced by index.html if you switch from the CSS wordmark to an <img> tag; see comment in index.html)
+- developer-days-logo.svg    -> official Developer Days event logo/badge (optional swap-in for the CSS pill badge; see comment in index.html)
+
+See ../README.md for full details. Neither file is required for the page to work today.
