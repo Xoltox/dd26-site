@@ -389,6 +389,18 @@
     font-weight: 800;
   }
 
+  .build-card-soon {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .build-card-soon:hover {
+    border-color: rgba(255,255,255,0.08);
+  }
+  .clock-glyph {
+    filter: grayscale(1);
+    opacity: 0.8;
+  }
+
   /* ---------- Footer ---------- */
   footer {
     padding: 3rem 0 2.5rem;
@@ -474,7 +486,7 @@
         </div>
         <div class="step">
           <span class="step-number">3</span>
-          <span class="step-label">Claude Code agent</span>
+          <span class="step-label">AI harness</span>
         </div>
         <div class="step">
           <span class="step-number">4</span>
@@ -513,10 +525,16 @@
         <p class="build-sub">Go build your own — clone the starter repo used on stage.</p>
       </a>
 
-      <!-- Detailed write-up placeholder — paste a URL here once the write-up is published -->
+      <!-- OutSystems Forge link placeholder — paste the published Forge component/app URL here -->
       <a href="#" class="build-card">
-        <p class="build-title">The full write-up <span class="arrow">→</span></p>
-        <p class="build-sub">A deeper breakdown of the build is coming soon.</p>
+        <p class="build-title">Get it on Forge <span class="arrow">→</span></p>
+        <p class="build-sub">Grab the actual built app — pull it apart, reverse-engineer it, remix it.</p>
+      </a>
+
+      <!-- Detailed write-up — intentionally left unlinked, no ETA yet -->
+      <a href="#" class="build-card build-card-soon" tabindex="-1">
+        <p class="build-title">The full write-up <span class="clock-glyph">🕒</span></p>
+        <p class="build-sub">Coming later.</p>
       </a>
     </section>
 
@@ -525,8 +543,7 @@
       <div class="footer-grid">
         <div class="corner-left">Built live, mistakes and all.</div>
         <div class="corner-right links">
-          <!-- Social/contact links placeholder — fill in real profile URLs -->
-          <a href="#">LinkedIn</a><a href="#">X</a><a href="#">Email</a>
+          <a href="https://linkedin.com/in/sshparth">LinkedIn</a>
         </div>
       </div>
     </footer>
