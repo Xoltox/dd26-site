@@ -389,11 +389,13 @@
     font-weight: 800;
   }
 
-  .build-card-soon {
+  .build-card-soon,
+  .build-card-locked {
     opacity: 0.6;
     cursor: default;
   }
-  .build-card-soon:hover {
+  .build-card-soon:hover,
+  .build-card-locked:hover {
     border-color: rgba(255,255,255,0.08);
   }
   .clock-glyph {
@@ -524,17 +526,17 @@
         <p class="build-sub">Go build your own — clone the starter repo used on stage.</p>
       </a>
 
-      <!-- OutSystems Forge link placeholder — paste the published Forge component/app URL here -->
-      <a href="#" class="build-card">
-        <p class="build-title">Get it on Forge <span class="arrow">→</span></p>
-        <p class="build-sub">Grab the actual built app — pull it apart, reverse-engineer it, remix it.</p>
-      </a>
+      <!-- OutSystems Forge — separate timeline, may take until end of day; swap to a real <a class="build-card"> once published -->
+      <div class="build-card build-card-soon">
+        <p class="build-title">Get it on Forge <span class="clock-glyph">🕒</span></p>
+        <p class="build-sub">Publishing later today.</p>
+      </div>
 
       <!-- Detailed write-up — intentionally left unlinked, no ETA yet -->
-      <a href="#" class="build-card build-card-soon" tabindex="-1">
+      <div class="build-card build-card-soon">
         <p class="build-title">The full write-up <span class="clock-glyph">🕒</span></p>
         <p class="build-sub">Coming later.</p>
-      </a>
+      </div>
     </section>
 
     <!-- ===== Footer ===== -->
@@ -542,7 +544,7 @@
       <div class="footer-grid">
         <div class="corner-left">Built live, mistakes and all.</div>
         <div class="corner-right links">
-          <a href="https://linkedin.com/in/sshparth">LinkedIn</a>
+          <a href="https://linkedin.com/in/sshparth" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </footer>
@@ -562,7 +564,8 @@
   //   var cta = document.getElementById('cta');
   //   cta.classList.remove('cta-locked');
   //   cta.classList.add('cta-active');
-  //   cta.href = url;
+  //   cta.style.cursor = 'pointer';
+  //   cta.onclick = function () { window.location.href = url; };
   //   cta.querySelector('.cta-title').innerHTML = 'Open the app →';
   //   cta.querySelector('.cta-sub').textContent = 'Live now — built on stage.';
   // }
