@@ -95,6 +95,11 @@
   <h1>We built a real app live on stage. Then Murphy's Law showed up anyway.</h1>
   <p class="byline"><strong>Parth Sharma</strong> — Senior Solution Architect, OutSystems · Developer Days Bengaluru · <time datetime="2026-08-14">14 August 2026</time></p>
 
+  <figure>
+    <img src="assets/stage-wide.jpg" alt="Parth Sharma walking onto the Developer Days Bengaluru stage, title slide 'The Future of Development on OutSystems: Agentic Systems Engineering' on the big screen.">
+    <figcaption>Developer Days Bengaluru, 8 August 2026. No slides prepared for what happens next.</figcaption>
+  </figure>
+
   <p>Short version: I stood on stage at Developer Days Bengaluru and turned a text prompt into a working, published OutSystems app — <strong>Digital Chaos</strong>, an anonymous "confess your code crimes" wall — using nothing but a prompt, an AI design tool, and an AI coding harness talking to OutSystems over MCP. No pre-written code. No safety net that anyone could see.</p>
 
   <p>Long version: it took three attempts to get here, one of them was a genuinely funny failure, and the live run took almost twice as long as the rehearsal because of course it did. Here's how it actually went.</p>
@@ -104,6 +109,11 @@
   <p>Four steps, repeated on a loop until it stopped being scary:</p>
 
   <p><strong>Prompt → AI design tool (Stitch) → AI harness (Claude Code + a custom OutSystems skill) → live OutSystems app.</strong></p>
+
+  <figure>
+    <img src="assets/stage-closeup.jpg" alt="Parth Sharma mid-talk on stage, gesturing, headset mic on, Developer Days branding behind him.">
+    <figcaption>Explaining why none of this should depend on one vendor's magic box.</figcaption>
+  </figure>
 
   <p>The design tool turns a one-paragraph idea into a styled HTML mockup. The harness reads that mockup, drives OutSystems' Mentor agent over MCP to actually build entities, screens, and logic, and publishes it. The point I wanted to make on stage: none of this is one magic vendor-locked box — swap the design tool, swap the harness, the pipeline still works. That's the whole "Agentic Systems Engineering" pitch.</p>
 
@@ -167,11 +177,21 @@
     <p>The honest lesson isn't "rehearse harder." It's: rehearse to know your <em>real</em> number, then build your talk track assuming reality adds 2x on top of it anyway. If your rehearsal says ten minutes, plan like it's twenty. Ours did, and it was fine — because the plan already accounted for narrating through the wait instead of standing there watching a spinner.</p>
   </div>
 
+  <figure>
+    <img src="assets/stage-slide.jpg" alt="The venue's big screen showing the live Digital Chaos app mid-demo: confession cards with fire-upvote counts, a submit box reading 'Confess your code crimes here.'">
+    <figcaption>Digital Chaos, live on the venue screen, mid-build.</figcaption>
+  </figure>
+
   <p>And this is exactly why Digital Chaos itself — the actual pre-hardened, previously-built app that the live build was reproducing — existed as the real fallback the whole time. The live build was real, attempted for real, on the actual tenant, over the actual MCP connection. But the segment's success was never allowed to depend on it finishing inside its rehearsed window. That's the difference between a demo and a bet.</p>
 
   <h2>What Digital Chaos actually is</h2>
 
   <p>An anonymous, single-page confession wall for developers at a conference. Type a short confession, hit "submit to the void," watch it appear at the top of a card wall. Every card has a 🔥 upvote that increments a count and marks itself as "already fired" for your session — soft-locked per device, not per login, because there is no login. Dark, brutalist, neon-lime-on-near-black, hard 2px borders, near-zero border radius. It is, structurally, one entity and a handful of screen actions. That's the point — small enough to build in one sitting, real enough that "it's just a toy demo" doesn't quite land once you see it running.</p>
+
+  <figure>
+    <img src="assets/stage-crowd.jpg" alt="Wide shot of the packed Developer Days Bengaluru auditorium, audience seated, venue's glass-triangle ceiling visible.">
+    <figcaption>The room that had to sit through all of this. Thanks for staying.</figcaption>
+  </figure>
 
   <hr>
 
