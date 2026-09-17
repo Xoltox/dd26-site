@@ -93,7 +93,7 @@
 
   <p class="eyebrow">The write-up</p>
   <h1>We built a real app live on stage. Then Murphy's Law showed up anyway.</h1>
-  <p class="byline"><strong>Parth Sharma</strong> — Senior Solution Architect, OutSystems · Developer Days Bengaluru</p>
+  <p class="byline"><strong>Parth Sharma</strong> — Senior Solution Architect, OutSystems · Developer Days Bengaluru · <time datetime="2026-08-14">14 August 2026</time></p>
 
   <p>Short version: I stood on stage at Developer Days Bengaluru and turned a text prompt into a working, published OutSystems app — <strong>Digital Chaos</strong>, an anonymous "confess your code crimes" wall — using nothing but a prompt, an AI design tool, and an AI coding harness talking to OutSystems over MCP. No pre-written code. No safety net that anyone could see.</p>
 
@@ -172,6 +172,26 @@
   <h2>What Digital Chaos actually is</h2>
 
   <p>An anonymous, single-page confession wall for developers at a conference. Type a short confession, hit "submit to the void," watch it appear at the top of a card wall. Every card has a 🔥 upvote that increments a count and marks itself as "already fired" for your session — soft-locked per device, not per login, because there is no login. Dark, brutalist, neon-lime-on-near-black, hard 2px borders, near-zero border radius. It is, structurally, one entity and a handful of screen actions. That's the point — small enough to build in one sitting, real enough that "it's just a toy demo" doesn't quite land once you see it running.</p>
+
+  <hr>
+
+  <p class="eyebrow">Update — <time datetime="2026-09-04">4 September 2026</time></p>
+  <h2 style="border-top: none; padding-top: 0; margin-top: 0.5rem;">The oneshot guide grew up: introducing Fulcrum</h2>
+
+  <p>The nine rules above were enough to get one screen safely through a stage demo. They were not enough for the longer, unattended, many-step builds that came after the talk — the kind where nobody is standing there to notice a Mentor turn quietly go sideways at step 23 of 47. That gap is what turned into <strong><a href="https://github.com/Xoltox/fulcrum" target="_blank" rel="noopener noreferrer">Fulcrum</a></strong>, a harness-agnostic skill set for driving OutSystems ODC Mentor through long, largely unattended build sessions with real guardrails.</p>
+
+  <p>Fulcrum isn't the oneshot guide reskinned — it's what the same hard-won-defect approach looks like once you generalize it past a single stage demo. A few of its underlying convictions will look familiar if you read the rules above:</p>
+
+  <ul>
+    <li><strong>Platform "success" signals lie in both directions.</strong> Zero validation errors and a clean publish are perfectly compatible with blank rows, empty repeaters, unrendered icons, corrupted content. This is the same lesson as "Mentor's 0 errors isn't proof," generalized into a whole verification skill instead of a one-off rule.</li>
+    <li><strong>Every rule states its own failure mode.</strong> Measured finding, in Fulcrum's own words: prompts that explained <em>why</em> a construct fails stopped the failure from recurring; prompts that just said "don't" did not. That's exactly why the oneshot guide above spells out root causes instead of just banning things.</li>
+    <li><strong>Tenant facts get probed once, not hardcoded.</strong> Things like which UI blocks exist, icon fonts, and backend quirks vary per tenant — so Fulcrum probes them into a `tenant-profile.md` during init instead of assuming this tenant behaves like the last one.</li>
+    <li><strong>Turn granularity is a first-class concern.</strong> The exact "one big combined turn crashed, three smaller turns didn't" lesson from stage day shows up in Fulcrum as its own skill governing turn decomposition, prompt shape, and staleness guards before mutations.</li>
+  </ul>
+
+  <p>To be precise about where Fulcrum's rules actually came from, since the repo's own README currently overstates it: it isn't derived from one clean production build. It's the accumulated residue of several zero-shot, one-shot, multi-shot, and long-running app builds — including this stage build and its oneshot guide — plus the error logs and build logs from other, separate builds along the way. That correction is going into the README directly; consider it corrected here too.</p>
+
+  <p>If you're doing anything longer or more unattended than a single stage screen with OutSystems' Mentor, Fulcrum is the version of "write down the hard-won corrections" built for that scale — and it's harness-agnostic on purpose, same as the point I made on stage: swap the harness, swap the design tool, the discipline still holds.</p>
 
   <a class="cta-end" href="index.html">
     <div class="inner">
