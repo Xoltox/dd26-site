@@ -92,7 +92,7 @@
   <a href="index.html" class="back">← back to recap</a>
 
   <p class="eyebrow">The write-up</p>
-  <h1>We built a real app live on stage. Then Murphy's Law showed up anyway.</h1>
+  <h1>I built a real app live on stage. Then Murphy's Law showed up anyway.</h1>
   <p class="byline"><strong>Parth Sharma</strong> — Senior Solution Architect, OutSystems · Developer Days Bengaluru · <time datetime="2026-08-14">14 August 2026</time></p>
 
   <figure>
@@ -122,9 +122,9 @@
 
   <p>The design tool turns a one-paragraph idea into a styled HTML mockup. The harness reads that mockup, drives OutSystems' Mentor agent over MCP to actually build entities, screens, and logic, and publishes it. The point I wanted to make on stage: none of this is one magic vendor-locked box — swap the design tool, swap the harness, the pipeline still works. That's the whole "Agentic Systems Engineering" pitch.</p>
 
-  <h2>Attempt 1 and 2: the boring failures that taught us everything</h2>
+  <h2>Attempt 1 and 2: the boring failures that taught me everything</h2>
 
-  <p>Before Digital Chaos, we rehearsed the whole pipeline on a much smaller target — a single booking screen. Twice. Both times it "worked," in the sense that Mentor reported zero errors and something got published. Neither time was it actually right:</p>
+  <p>Before Digital Chaos, I rehearsed the whole pipeline on a much smaller target — a single booking screen. Twice. Both times it "worked," in the sense that Mentor reported zero errors and something got published. Neither time was it actually right:</p>
 
   <ul>
     <li>A card <strong>grid</strong> came out as a vertical <strong>list</strong>, because the widgets were bound directly instead of through a proper Gallery + IList source.</li>
@@ -135,7 +135,7 @@
 
   <blockquote>Mentor telling you "0 errors, retrying" is not the same thing as 0 errors. Always pull the raw deploy log when something smells wrong.</blockquote>
 
-  <p>None of these are exotic bugs. They're the exact kind of thing that turns a confident live demo into a very long, very quiet 45 seconds on stage. So instead of hoping attempt 3 would just go better, we wrote all of it down.</p>
+  <p>None of these are exotic bugs. They're the exact kind of thing that turns a confident live demo into a very long, very quiet 45 seconds on stage. So instead of hoping attempt 3 would just go better, I wrote all of it down.</p>
 
   <h2>The oneshot build guide</h2>
 
@@ -163,14 +163,14 @@
 
   <h2>The night before: the rehearsal run</h2>
 
-  <p>The night before D-Day, we ran the exact stage-day spec one more time, purely to time it and see what it actually cost in tokens. This is the receipt:</p>
+  <p>The night before D-Day, I ran the exact stage-day spec one more time, purely to time it and see what it actually cost in tokens. This is the receipt:</p>
 
   <figure>
     <img src="assets/trial-run-usage.jpg" alt="Claude Code usage stats from the rehearsal run: total cost $3.18, API duration 10m 17s, 217 input tokens, 22.4k output tokens, 6.6m tokens read from cache, 145.7k tokens written to cache.">
     <figcaption>The rehearsal run, timed the night before the talk. $3.18, ~10 minutes of actual API time.</figcaption>
   </figure>
 
-  <p>Ten minutes and seventeen seconds of API time, three dollars and change, to go from a written spec to a published, working app. That's the number we planned the whole stage segment around — narrate the pipeline, let the build run in the background, land the reveal a few minutes later.</p>
+  <p>Ten minutes and seventeen seconds of API time, three dollars and change, to go from a written spec to a published, working app. That's the number I planned the whole stage segment around — narrate the pipeline, let the build run in the background, land the reveal a few minutes later.</p>
 
   <p>Reader, the stage day run took over twenty minutes.</p>
 
