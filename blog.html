@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Digital Chaos: building an OutSystems app live on stage (and Murphy's Law)</title>
+<meta name="description" content="Dev-blog write-up: building Digital Chaos live on stage at Developer Days Bengaluru — the oneshot guide, the rehearsal run, and everything Murphy's Law had to say about it.">
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --bg-card: #121214;
+    --text: #f5f5f7;
+    --text-muted: #8a8a92;
+    --text-faint: #5c5c64;
+    --green: #3ddc84;
+    --blue: #4a8cff;
+    --purple: #a855f7;
+    --gradient: linear-gradient(115deg, var(--green) 0%, var(--blue) 50%, var(--purple) 100%);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--green); }
+  .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .back { display: inline-block; margin: 2rem 0 1rem; font-size: 0.85rem; color: var(--text-faint); text-decoration: none; }
+  .back:hover { color: var(--text-muted); }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
+    font-weight: 700; color: var(--text-faint); margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: 2rem; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+  @media (min-width: 640px) { h1 { font-size: 2.6rem; } }
+  .byline { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 2.5rem; }
+  h2 {
+    font-size: 1.4rem; font-weight: 800; margin: 2.5rem 0 1rem;
+    border-top: 1px solid rgba(255,255,255,0.07); padding-top: 2rem;
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  p { font-size: 1rem; line-height: 1.7; color: #d0d0d6; margin: 0 0 1.2rem; }
+  ul, ol { color: #d0d0d6; line-height: 1.7; padding-left: 1.3rem; margin: 0 0 1.2rem; }
+  li { margin-bottom: 0.4rem; }
+  code {
+    background: rgba(255,255,255,0.08); padding: 0.15em 0.4em; border-radius: 4px;
+    font-size: 0.9em; color: var(--green);
+  }
+  pre {
+    background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 1rem 1.2rem; overflow-x: auto; margin: 0 0 1.2rem;
+  }
+  pre code { background: none; padding: 0; color: #d0d0d6; }
+  blockquote {
+    margin: 0 0 1.2rem; padding: 0.9rem 1.2rem; border-left: 3px solid;
+    border-image: var(--gradient) 1; background: rgba(255,255,255,0.03);
+    font-style: italic; color: var(--text-muted);
+  }
+  figure { margin: 1.5rem 0; }
+  figure img {
+    width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+    display: block;
+  }
+  figcaption {
+    font-size: 0.8rem; color: var(--text-faint); margin-top: 0.6rem; text-align: center;
+  }
+  .callout {
+    background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 1.3rem 1.5rem; margin: 0 0 1.2rem;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 3rem 0; }
+  .cta-end {
+    display: block; text-decoration: none; padding: 1.5rem; border-radius: 16px;
+    background: var(--gradient); margin: 2rem 0;
+  }
+  .cta-end .inner {
+    background: #0e0e10; border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .cta-end .t { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.2rem; }
+  .cta-end .s { font-size: 0.85rem; color: var(--green); }
+</style>
+</head>
+<body>
+<main class="container">
+
+  <a href="index.html" class="back">← back to recap</a>
+
+  <p class="eyebrow">The write-up</p>
+  <h1>We built a real app live on stage. Then Murphy's Law showed up anyway.</h1>
+  <p class="byline"><strong>Parth Sharma</strong> — Senior Solution Architect, OutSystems · Developer Days Bengaluru</p>
+
+  <p>Short version: I stood on stage at Developer Days Bengaluru and turned a text prompt into a working, published OutSystems app — <strong>Digital Chaos</strong>, an anonymous "confess your code crimes" wall — using nothing but a prompt, an AI design tool, and an AI coding harness talking to OutSystems over MCP. No pre-written code. No safety net that anyone could see.</p>
+
+  <p>Long version: it took three attempts to get here, one of them was a genuinely funny failure, and the live run took almost twice as long as the rehearsal because of course it did. Here's how it actually went.</p>
+
+  <h2>The pipeline</h2>
+
+  <p>Four steps, repeated on a loop until it stopped being scary:</p>
+
+  <p><strong>Prompt → AI design tool (Stitch) → AI harness (Claude Code + a custom OutSystems skill) → live OutSystems app.</strong></p>
+
+  <p>The design tool turns a one-paragraph idea into a styled HTML mockup. The harness reads that mockup, drives OutSystems' Mentor agent over MCP to actually build entities, screens, and logic, and publishes it. The point I wanted to make on stage: none of this is one magic vendor-locked box — swap the design tool, swap the harness, the pipeline still works. That's the whole "Agentic Systems Engineering" pitch.</p>
+
+  <h2>Attempt 1 and 2: the boring failures that taught us everything</h2>
+
+  <p>Before Digital Chaos, we rehearsed the whole pipeline on a much smaller target — a single booking screen. Twice. Both times it "worked," in the sense that Mentor reported zero errors and something got published. Neither time was it actually right:</p>
+
+  <ul>
+    <li>A card <strong>grid</strong> came out as a vertical <strong>list</strong>, because the widgets were bound directly instead of through a proper Gallery + IList source.</li>
+    <li>Buttons on screen literally said <code>Button1</code> and <code>ButtonBOOK IT!</code> — placeholder captions that never got overwritten, just appended to.</li>
+    <li>A theme that, according to the stylesheet, was fully applied. According to the actual rendered screen: nope. A CSS class existed, but nothing on the page ever had that class attached to it.</li>
+    <li>One hard platform rejection on publish — <code>ModelFeature_UIPublicProperty ... has been removed</code> — that Mentor's own validator confidently reported as "0 errors" for several turns running. The real cause only showed up in the raw deploy log, not Mentor's self-summary.</li>
+  </ul>
+
+  <blockquote>Mentor telling you "0 errors, retrying" is not the same thing as 0 errors. Always pull the raw deploy log when something smells wrong.</blockquote>
+
+  <p>None of these are exotic bugs. They're the exact kind of thing that turns a confident live demo into a very long, very quiet 45 seconds on stage. So instead of hoping attempt 3 would just go better, we wrote all of it down.</p>
+
+  <h2>The oneshot build guide</h2>
+
+  <p>What came out of those two failed rehearsals is a single markdown file — the <strong>oneshot build guide</strong> — that gets pasted into the harness's context alongside the actual app brief, every single time. It's not clever prompting, it's just hard-won corrections turned into rules:</p>
+
+  <ol>
+    <li>Bind repeating content through <code>Gallery.Content → IList(Source=Aggregate.List) → widget</code>. Never static-repeat widgets directly — that's what silently collapses a grid into a list.</li>
+    <li>Theme via real <code>:root</code> CSS variable overrides on the platform's own tokens, not invented class systems — and <strong>verify the class is actually attached to the live widget</strong>, not just present in the stylesheet.</li>
+    <li>Every button's <code>Caption</code> must be fully <em>set</em>, never appended to. Read every caption back before calling it done.</li>
+    <li>Any server action running a query must explicitly assign the result into its own output parameters — running the query isn't enough if nothing maps it to something the caller can read.</li>
+    <li>Skip the Layout placeholder mechanism entirely for a single anonymous screen — it's an unconfirmed landmine on this tenant.</li>
+    <li>If publish fails and Mentor's explanation doesn't add up, don't trust it — pull the raw deploy log yourself.</li>
+    <li>Ask for "accessible to Everyone, no login" — never literally "role Anonymous." Said literally, Mentor will happily create an actual login Role called <code>Anonymous</code>. It is not what you wanted.</li>
+    <li>Poll lean — don't drag full event-trail detail out of every status check, only when something's actually stuck.</li>
+    <li>For anonymous "vote once" UX, a device-scoped soft lock (client-side UUID + join entity + check-before-write) is enough. It's not a security boundary, it's a fun-app boundary, and that's fine.</li>
+  </ol>
+
+  <p>Applying these rules is what took the process from "broken" to "close to source, functionally correct." It's also, not coincidentally, the same list that made the difference between a live demo that's stressful to watch and one that's just... a bit boring, in the good way.</p>
+
+  <h2>The night before: the rehearsal run</h2>
+
+  <p>The night before D-Day, we ran the exact stage-day spec one more time, purely to time it and see what it actually cost in tokens. This is the receipt:</p>
+
+  <figure>
+    <img src="assets/trial-run-usage.jpg" alt="Claude Code usage stats from the rehearsal run: total cost $3.18, API duration 10m 17s, 217 input tokens, 22.4k output tokens, 6.6m tokens read from cache, 145.7k tokens written to cache.">
+    <figcaption>The rehearsal run, timed the night before the talk. $3.18, ~10 minutes of actual API time.</figcaption>
+  </figure>
+
+  <p>Ten minutes and seventeen seconds of API time, three dollars and change, to go from a written spec to a published, working app. That's the number we planned the whole stage segment around — narrate the pipeline, let the build run in the background, land the reveal a few minutes later.</p>
+
+  <p>Reader, the stage day run took over twenty minutes.</p>
+
+  <h2>Murphy's Law, live, in front of an audience</h2>
+
+  <p>Nothing was fundamentally broken — no repeat of the grid-that-became-a-list, no ghost Anonymous role. It was just <em>slower</em>, in the specific way that live demos are always slower than rehearsals: a combined Mentor turn that tried to push several fixes at once hit a platform-side crash (<code>IClientAction cannot be used as the value for IUILifeCycleEvent.Destination</code>) partway through, which meant backing off and re-running the remaining work as smaller, separate turns instead of one big one. Each of those smaller turns is safer but adds its own round-trip. Multiply that by "this is happening on a stage, in front of people, with a clock running in the back of your head," and ten minutes quietly becomes twenty-plus.</p>
+
+  <div class="callout">
+    <p>The honest lesson isn't "rehearse harder." It's: rehearse to know your <em>real</em> number, then build your talk track assuming reality adds 2x on top of it anyway. If your rehearsal says ten minutes, plan like it's twenty. Ours did, and it was fine — because the plan already accounted for narrating through the wait instead of standing there watching a spinner.</p>
+  </div>
+
+  <p>And this is exactly why Digital Chaos itself — the actual pre-hardened, previously-built app that the live build was reproducing — existed as the real fallback the whole time. The live build was real, attempted for real, on the actual tenant, over the actual MCP connection. But the segment's success was never allowed to depend on it finishing inside its rehearsed window. That's the difference between a demo and a bet.</p>
+
+  <h2>What Digital Chaos actually is</h2>
+
+  <p>An anonymous, single-page confession wall for developers at a conference. Type a short confession, hit "submit to the void," watch it appear at the top of a card wall. Every card has a 🔥 upvote that increments a count and marks itself as "already fired" for your session — soft-locked per device, not per login, because there is no login. Dark, brutalist, neon-lime-on-near-black, hard 2px borders, near-zero border radius. It is, structurally, one entity and a handful of screen actions. That's the point — small enough to build in one sitting, real enough that "it's just a toy demo" doesn't quite land once you see it running.</p>
+
+  <a class="cta-end" href="index.html">
+    <div class="inner">
+      <div class="t">See the app, the starter repo, and the full recap →</div>
+      <div class="s">Back to the main page</div>
+    </div>
+  </a>
+
+  <hr>
+
+  <p style="color: var(--text-faint); font-size: 0.85rem;">Built live, mistakes and all. — Parth Sharma, OutSystems.</p>
+
+</main>
+</body>
+</html>
