@@ -140,6 +140,12 @@
 
   <p>Applying these rules is what took the process from "broken" to "close to source, functionally correct." It's also, not coincidentally, the same list that made the difference between a live demo that's stressful to watch and one that's just... a bit boring, in the good way.</p>
 
+  <h2>The harness has opinions, and they're not always good ones</h2>
+
+  <p>Worth naming honestly: a chunk of those defects didn't come from Mentor being dumb. They came from the harness (Claude, in this case) giving Mentor <em>very</em> explicit, over-specified instructions instead of describing the outcome and getting out of the way — which nudges Mentor toward whatever literal interpretation matches those instructions, anti-patterns included. Tell an agent "make it accessible with an anonymous role" and it will go make you an actual Role entity named <code>Anonymous</code>, because that's a completely reasonable reading of what you typed. Tell it to fix six things in one big turn instead of trusting the platform's own smaller-batch conventions, and you get a crash mid-turn instead of six clean small ones.</p>
+
+  <p>None of this is a Mentor-specific failure. It's LLMs being LLMs — an agent optimizing hard for literally satisfying the instruction it was given, even when the instruction itself was the anti-pattern. The fix wasn't "use a smarter model." It was writing down, in the oneshot guide, exactly which outcomes to ask for and which literal phrasings to avoid — <code>role Anonymous</code> vs. "Everyone, no login," one big combined turn vs. several small ones. Once the harness stopped over-specifying, Mentor stopped following it off a cliff.</p>
+
   <h2>The night before: the rehearsal run</h2>
 
   <p>The night before D-Day, we ran the exact stage-day spec one more time, purely to time it and see what it actually cost in tokens. This is the receipt:</p>
